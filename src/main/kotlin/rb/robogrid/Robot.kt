@@ -10,6 +10,7 @@ class Robot(val x: Int, val y: Int, val dir: Direction) {
 
     init {
         if (x < 0 || x > 50) throw IllegalArgumentException("Invalid x: must be in [0, 50]")
+        if (y < 0 || y > 50) throw IllegalArgumentException("Invalid y: must be in [0, 50]")
     }
 
     override fun toString() = "$x $y ${dir.name}"

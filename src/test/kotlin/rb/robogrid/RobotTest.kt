@@ -22,4 +22,14 @@ class RobotTest {
     fun `robot x coordinate cannot be smaller than 0`() {
         Robot(x = -1, y = 0, dir = Direction.E)
     }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `robot y coordinate cannot be bigger than 50`() {
+        Robot(x = 0, y = 51, dir = Direction.E)
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `robot y coordinate cannot be smaller than 0`() {
+        Robot(x = 0, y = -1, dir = Direction.E)
+    }
 }
