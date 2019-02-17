@@ -1,13 +1,15 @@
 package rb.robogrid
 
-import org.junit.*
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Test
 
 class RobotTest {
 
     @Test
-    fun `robot is initialised with initial position and direction`() {
+    fun `robot string representation matches its current position and direction separate by one space`() {
         // test passes if the code compiles
-        Robot(1, 1, Direction.E)
+        assertThat(Robot(1, 1, Direction.E).toString(), `is`("1 1 E"))
     }
 
 }
