@@ -25,18 +25,11 @@ class Robot(val position: Position, val dir: Direction) {
             Pair(Direction.S, Instruction.R) to Direction.W
     )
 
-    init {
-        if (position.x < 0 || position.x > 50) throw IllegalArgumentException("Invalid x: must be in [0, 50]")
-        if (position.y < 0 || position.y > 50) throw IllegalArgumentException("Invalid y: must be in [0, 50]")
-    }
-
     override fun toString() = "${position.x} ${position.y} ${dir.name}"
 
     fun apply(instruction: Instruction): Robot {
         val newDirection = directionsMap[Pair(dir, instruction)] ?: dir
-
         val newPosition = newDirection.positionTransformer(position)
-
         return Robot(newPosition, newDirection)
     }
 }

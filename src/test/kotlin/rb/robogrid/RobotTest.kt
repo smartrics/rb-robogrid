@@ -13,26 +13,6 @@ class RobotTest {
         assertThat(Robot(Position(1, 1), Direction.E).toString(), `is`("1 1 E"))
     }
 
-    @Test(expected = IllegalArgumentException::class)
-    fun `robot x coordinate cannot be bigger than 50`() {
-        Robot(Position(x = 51, y = 0), dir = Direction.E)
-    }
-
-    @Test(expected = IllegalArgumentException::class)
-    fun `robot x coordinate cannot be smaller than 0`() {
-        Robot(Position(x = -1, y = 0), dir = Direction.E)
-    }
-
-    @Test(expected = IllegalArgumentException::class)
-    fun `robot y coordinate cannot be bigger than 50`() {
-        Robot(Position(x = 0, y = 51), dir = Direction.E)
-    }
-
-    @Test(expected = IllegalArgumentException::class)
-    fun `robot y coordinate cannot be smaller than 0`() {
-        Robot(Position(x = 0, y = -1), dir = Direction.E)
-    }
-
     @Test
     fun `robot instructed to move left changes direction`() {
         assertThat(newRobotWith(currentDir = Direction.E).apply(Instruction.L).dir, `is`(Direction.N))
