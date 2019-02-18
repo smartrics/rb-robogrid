@@ -13,7 +13,10 @@ enum class Instruction {
 class Robot(val x: Int, val y: Int, val dir: Direction) {
 
     private val directionsMap = mapOf(
-            Pair(Direction.E, Instruction.L) to Direction.N
+            Pair(Direction.E, Instruction.L) to Direction.N,
+            Pair(Direction.N, Instruction.L) to Direction.W,
+            Pair(Direction.W, Instruction.L) to Direction.S,
+            Pair(Direction.S, Instruction.L) to Direction.E
     )
 
     init {
