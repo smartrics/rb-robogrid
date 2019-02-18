@@ -4,7 +4,7 @@ enum class Direction(val positionTransformer: (Int, Int) -> Pair<Int, Int>) {
     N({ x, y -> Pair(x, y + 1) }),
     S({ x, y -> Pair(x, y - 1) }),
     E({ x, y -> Pair(x + 1, y) }),
-    W({ x, y -> Pair(x, y) })
+    W({ x, y -> Pair(x - 1, y) })
 }
 
 enum class Instruction {

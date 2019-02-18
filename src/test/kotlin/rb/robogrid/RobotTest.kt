@@ -79,6 +79,13 @@ class RobotTest {
         assertThat(robot.y, `is`(6))
     }
 
+    @Test
+    fun `robot moving forward when at west decreases x by 1 and keeps y as is`() {
+        val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.W).apply(Instruction.F)
+        assertThat(robot.x, `is`(9))
+        assertThat(robot.y, `is`(7))
+    }
+
     private fun newRobotWith(current_x: Int = 10,
                              current_y: Int = 10,
                              currentDir: Direction = Direction.N)
