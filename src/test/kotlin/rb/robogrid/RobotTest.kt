@@ -10,27 +10,27 @@ class RobotTest {
     @Test
     fun `robot string representation matches its current position and direction separate by one space`() {
         // test passes if the code compiles
-        assertThat(Robot(1, 1, Direction.E).toString(), `is`("1 1 E"))
+        assertThat(Robot(Position(1, 1), Direction.E).toString(), `is`("1 1 E"))
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun `robot x coordinate cannot be bigger than 50`() {
-        Robot(x = 51, y = 0, dir = Direction.E)
+        Robot(Position(x = 51, y = 0), dir = Direction.E)
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun `robot x coordinate cannot be smaller than 0`() {
-        Robot(x = -1, y = 0, dir = Direction.E)
+        Robot(Position(x = -1, y = 0), dir = Direction.E)
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun `robot y coordinate cannot be bigger than 50`() {
-        Robot(x = 0, y = 51, dir = Direction.E)
+        Robot(Position(x = 0, y = 51), dir = Direction.E)
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun `robot y coordinate cannot be smaller than 0`() {
-        Robot(x = 0, y = -1, dir = Direction.E)
+        Robot(Position(x = 0, y = -1), dir = Direction.E)
     }
 
     @Test
@@ -60,34 +60,34 @@ class RobotTest {
     @Test
     fun `robot moving forward when at north increases y by 1 and keeps x as is`() {
         val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.N).apply(Instruction.F)
-        assertThat(robot.x, `is`(10))
-        assertThat(robot.y, `is`(8))
+        assertThat(robot.position.x, `is`(10))
+        assertThat(robot.position.y, `is`(8))
     }
 
     @Test
     fun `robot moving forward when at east increases x by 1 and keeps y as is`() {
         val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.E).apply(Instruction.F)
-        assertThat(robot.x, `is`(11))
-        assertThat(robot.y, `is`(7))
+        assertThat(robot.position.x, `is`(11))
+        assertThat(robot.position.y, `is`(7))
     }
 
 
     @Test
     fun `robot moving forward when at south decreases y by 1 and keeps x as is`() {
         val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.S).apply(Instruction.F)
-        assertThat(robot.x, `is`(10))
-        assertThat(robot.y, `is`(6))
+        assertThat(robot.position.x, `is`(10))
+        assertThat(robot.position.y, `is`(6))
     }
 
     @Test
     fun `robot moving forward when at west decreases x by 1 and keeps y as is`() {
         val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.W).apply(Instruction.F)
-        assertThat(robot.x, `is`(9))
-        assertThat(robot.y, `is`(7))
+        assertThat(robot.position.x, `is`(9))
+        assertThat(robot.position.y, `is`(7))
     }
 
     private fun newRobotWith(current_x: Int = 10,
                              current_y: Int = 10,
                              currentDir: Direction = Direction.N)
-            = Robot(x = current_x, y = current_y, dir = currentDir)
+            = Robot(Position(x = current_x, y = current_y), dir = currentDir)
 }

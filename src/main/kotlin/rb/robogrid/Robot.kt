@@ -1,17 +1,17 @@
 package rb.robogrid
 
-enum class Direction(val positionTransformer: (Int, Int) -> Pair<Int, Int>) {
-    N({ x, y -> Pair(x, y + 1) }),
-    S({ x, y -> Pair(x, y - 1) }),
-    E({ x, y -> Pair(x + 1, y) }),
-    W({ x, y -> Pair(x - 1, y) })
+enum class Direction(val positionTransformer: (Position) -> Position) {
+    N({ p -> p.inc_y() }),
+    S({ p -> p.dec_y() }),
+    E({ p -> p.inc_x()}),
+    W({ p -> p.dec_x() })
 }
 
 enum class Instruction {
     L, R, F
 }
 
-class Robot(val x: Int, val y: Int, val dir: Direction) {
+class Robot(val position: Position, val dir: Direction) {
 
     private val directionsMap = mapOf(
             Pair(Direction.E, Instruction.L) to Direction.N,
@@ -26,17 +26,17 @@ class Robot(val x: Int, val y: Int, val dir: Direction) {
     )
 
     init {
-        if (x < 0 || x > 50) throw IllegalArgumentException("Invalid x: must be in [0, 50]")
-        if (y < 0 || y > 50) throw IllegalArgumentException("Invalid y: must be in [0, 50]")
+        if (position.x < 0 || position.x > 50) throw IllegalArgumentException("Invalid x: must be in [0, 50]")
+        if (position.y < 0 || position.y > 50) throw IllegalArgumentException("Invalid y: must be in [0, 50]")
     }
 
-    override fun toString() = "$x $y ${dir.name}"
+    override fun toString() = "${position.x} ${position.y} ${dir.name}"
 
     fun apply(instruction: Instruction): Robot {
         val newDirection = directionsMap[Pair(dir, instruction)] ?: dir
 
-        val newPosition = newDirection.positionTransformer(x, y)
+        val newPosition = newDirection.positionTransformer(position)
 
-        return Robot(newPosition.first, newPosition.second, newDirection)
+        return Robot(newPosition, newDirection)
     }
 }
