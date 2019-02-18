@@ -9,10 +9,7 @@ class GridTest {
     @Test
     fun `a grid is initialised with width and height`() {
         val g = Grid(5, 3)
-
-        assertThat(g.x_zero, `is`(0))
-        assertThat(g.y_zero, `is`(0))
-        assertThat(g.x_top, `is`(5))
-        assertThat(g.y_top, `is`(3))
+        assertThat(g.zero, `is`(Position(0, 0)))
+        assertThat(g.top, `is`(Position(5, 3)))
     }
 }
