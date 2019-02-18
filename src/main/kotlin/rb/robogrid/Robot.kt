@@ -25,7 +25,7 @@ class Robot(val position: Position, val dir: Direction) {
             Pair(Direction.S, Instruction.R) to Direction.W
     )
 
-    override fun toString() = "${position.x} ${position.y} ${dir.name}"
+    override fun toString() = "$position ${dir.name}"
 
     fun apply(instruction: Instruction): Robot {
         val newDirection = directionsMap[Pair(dir, instruction)] ?: dir
