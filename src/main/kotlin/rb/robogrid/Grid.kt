@@ -8,8 +8,12 @@ class Grid(w: Int, h: Int) {
     val zero = Position(0, 0)
     val top = Position(zero.x + w, zero.y + h)
 
+    val scentedPos = mutableMapOf<Position, Unit>()
+
     fun accept(currentPos: Position): Position {
         if(currentPos.x in zero.x .. top.x && currentPos.y in zero.y .. top.y) return currentPos
+        if(scentedPos[currentPos] != null) return Position.SCENTED_LOST
+        scentedPos[currentPos] = Unit
         return Position.LOST
     }
 

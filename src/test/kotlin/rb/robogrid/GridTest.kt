@@ -23,4 +23,13 @@ class GridTest {
         assertThat(Grid(5, 3).accept(Position(10, 2)), `is`(Position.LOST))
         assertThat(Grid(5, 3).accept(Position(3, 20)), `is`(Position.LOST))
     }
+
+    @Test
+    fun `accepts a LOST position and if already accepted as lost makes it scented`() {
+        val grid = Grid(5, 3)
+        val accept1 = grid.accept(Position(10, 2))
+        val accept2 = grid.accept(Position(10, 2))
+        assertThat(accept1.scented, `is`(false))
+        assertThat(accept2.scented, `is`(true))
+    }
 }
