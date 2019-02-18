@@ -1,10 +1,10 @@
 package rb.robogrid
 
-enum class Direction(val positionTransformer: (Position) -> Position) {
-    N({ p -> p.inc_y() }),
-    S({ p -> p.dec_y() }),
-    E({ p -> p.inc_x()}),
-    W({ p -> p.dec_x() })
+enum class Direction(val positionTransformer: (Instruction, Position) -> Position) {
+    N({ i, p -> if (i == Instruction.F) p.inc_y() else p }),
+    S({ i, p -> if (i == Instruction.F) p.dec_y() else p }),
+    E({ i, p -> if (i == Instruction.F) p.inc_x() else p }),
+    W({ i, p -> if (i == Instruction.F) p.dec_x() else p })
 }
 
 enum class Instruction {
@@ -29,7 +29,7 @@ class Robot(val position: Position, val dir: Direction, val grid: Grid) {
 
     fun apply(instruction: Instruction): Robot {
         val newDirection = directionsMap[Pair(dir, instruction)] ?: dir
-        val newPosition = newDirection.positionTransformer(position)
+        val newPosition = newDirection.positionTransformer(instruction, position)
         return Robot(grid.accept(newPosition), newDirection, grid)
     }
 }

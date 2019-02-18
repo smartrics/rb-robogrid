@@ -69,6 +69,54 @@ class RobotTest {
     }
 
     @Test
+    fun `robot wont change position when at west and applying left`() {
+        val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.W).apply(Instruction.L)
+        assertThat(robot.position, `is`(Position(10, 7)))
+    }
+
+    @Test
+    fun `robot wont change position when at west and applying right`() {
+        val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.W).apply(Instruction.R)
+        assertThat(robot.position, `is`(Position(10, 7)))
+    }
+
+    @Test
+    fun `robot wont change position when at east and applying left`() {
+        val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.E).apply(Instruction.L)
+        assertThat(robot.position, `is`(Position(10, 7)))
+    }
+
+    @Test
+    fun `robot wont change position when at east and applying right`() {
+        val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.E).apply(Instruction.R)
+        assertThat(robot.position, `is`(Position(10, 7)))
+    }
+
+    @Test
+    fun `robot wont change position when at north and applying left`() {
+        val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.N).apply(Instruction.L)
+        assertThat(robot.position, `is`(Position(10, 7)))
+    }
+
+    @Test
+    fun `robot wont change position when at north and applying right`() {
+        val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.N).apply(Instruction.R)
+        assertThat(robot.position, `is`(Position(10, 7)))
+    }
+
+    @Test
+    fun `robot wont change position when at south and applying left`() {
+        val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.S).apply(Instruction.L)
+        assertThat(robot.position, `is`(Position(10, 7)))
+    }
+
+    @Test
+    fun `robot wont change position when at south and applying right`() {
+        val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.S).apply(Instruction.R)
+        assertThat(robot.position, `is`(Position(10, 7)))
+    }
+
+    @Test
     fun `robot delegates to grid acceptance of new position`() {
         // next time we'll use mockito
         class FooGrid : Grid {
