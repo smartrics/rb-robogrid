@@ -16,7 +16,12 @@ class Robot(val x: Int, val y: Int, val dir: Direction) {
             Pair(Direction.E, Instruction.L) to Direction.N,
             Pair(Direction.N, Instruction.L) to Direction.W,
             Pair(Direction.W, Instruction.L) to Direction.S,
-            Pair(Direction.S, Instruction.L) to Direction.E
+            Pair(Direction.S, Instruction.L) to Direction.E,
+
+            Pair(Direction.E, Instruction.R) to Direction.S,
+            Pair(Direction.N, Instruction.R) to Direction.E,
+            Pair(Direction.W, Instruction.R) to Direction.N,
+            Pair(Direction.S, Instruction.R) to Direction.W
     )
 
     init {
