@@ -35,27 +35,37 @@ class RobotTest {
 
     @Test
     fun `robot instructed to move left changes direction`() {
-        assertThat(newRobotWith(Direction.E).apply(Instruction.L).dir, `is`(Direction.N))
-        assertThat(newRobotWith(Direction.N).apply(Instruction.L).dir, `is`(Direction.W))
-        assertThat(newRobotWith(Direction.W).apply(Instruction.L).dir, `is`(Direction.S))
-        assertThat(newRobotWith(Direction.S).apply(Instruction.L).dir, `is`(Direction.E))
+        assertThat(newRobotWith(currentDir = Direction.E).apply(Instruction.L).dir, `is`(Direction.N))
+        assertThat(newRobotWith(currentDir = Direction.N).apply(Instruction.L).dir, `is`(Direction.W))
+        assertThat(newRobotWith(currentDir = Direction.W).apply(Instruction.L).dir, `is`(Direction.S))
+        assertThat(newRobotWith(currentDir = Direction.S).apply(Instruction.L).dir, `is`(Direction.E))
     }
 
     @Test
     fun `robot instructed to move right changes direction`() {
-        assertThat(newRobotWith(Direction.E).apply(Instruction.R).dir, `is`(Direction.S))
-        assertThat(newRobotWith(Direction.N).apply(Instruction.R).dir, `is`(Direction.E))
-        assertThat(newRobotWith(Direction.W).apply(Instruction.R).dir, `is`(Direction.N))
-        assertThat(newRobotWith(Direction.S).apply(Instruction.R).dir, `is`(Direction.W))
+        assertThat(newRobotWith(currentDir = Direction.E).apply(Instruction.R).dir, `is`(Direction.S))
+        assertThat(newRobotWith(currentDir = Direction.N).apply(Instruction.R).dir, `is`(Direction.E))
+        assertThat(newRobotWith(currentDir = Direction.W).apply(Instruction.R).dir, `is`(Direction.N))
+        assertThat(newRobotWith(currentDir = Direction.S).apply(Instruction.R).dir, `is`(Direction.W))
     }
 
     @Test
     fun `robot instructed to move forward won't change direction`() {
-        assertThat(newRobotWith(Direction.E).apply(Instruction.F).dir, `is`(Direction.E))
-        assertThat(newRobotWith(Direction.N).apply(Instruction.F).dir, `is`(Direction.N))
-        assertThat(newRobotWith(Direction.W).apply(Instruction.F).dir, `is`(Direction.W))
-        assertThat(newRobotWith(Direction.S).apply(Instruction.F).dir, `is`(Direction.S))
+        assertThat(newRobotWith(currentDir = Direction.E).apply(Instruction.F).dir, `is`(Direction.E))
+        assertThat(newRobotWith(currentDir = Direction.N).apply(Instruction.F).dir, `is`(Direction.N))
+        assertThat(newRobotWith(currentDir = Direction.W).apply(Instruction.F).dir, `is`(Direction.W))
+        assertThat(newRobotWith(currentDir = Direction.S).apply(Instruction.F).dir, `is`(Direction.S))
     }
 
-    private fun newRobotWith(currentDir: Direction) = Robot(0, 0, dir = currentDir)
+    @Test
+    fun `robot moving forward when at north increases y by 1 and keeps x as is`() {
+        val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.N).apply(Instruction.F)
+        assertThat(robot.x, `is`(10))
+        assertThat(robot.y, `is`(8))
+    }
+
+    private fun newRobotWith(current_x: Int = 0,
+                             current_y: Int = 0,
+                             currentDir: Direction = Direction.N)
+            = Robot(current_x, y = current_y, dir = currentDir)
 }

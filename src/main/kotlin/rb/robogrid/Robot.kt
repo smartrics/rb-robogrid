@@ -1,9 +1,10 @@
 package rb.robogrid
 
-import java.lang.IllegalArgumentException
-
-enum class Direction {
-    N, S, E, W
+enum class Direction(val positionTransformer: (Int, Int) -> Pair<Int, Int>) {
+    N({ x, y -> Pair(x, y + 1) }),
+    S({ x, y -> Pair(x, y) }),
+    E({ x, y -> Pair(x, y) }),
+    W({ x, y -> Pair(x, y) })
 }
 
 enum class Instruction {
@@ -33,6 +34,9 @@ class Robot(val x: Int, val y: Int, val dir: Direction) {
 
     fun apply(instruction: Instruction): Robot {
         val newDirection = directionsMap[Pair(dir, instruction)] ?: dir
-        return Robot(x, y, newDirection)
+
+        val newPosition = newDirection.positionTransformer(x, y)
+
+        return Robot(newPosition.first, newPosition.second, newDirection)
     }
 }
