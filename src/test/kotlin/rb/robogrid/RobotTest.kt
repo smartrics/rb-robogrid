@@ -3,14 +3,13 @@ package rb.robogrid
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
-import java.lang.IllegalArgumentException
 
 class RobotTest {
 
     @Test
     fun `robot string representation matches its current position and direction separate by one space`() {
         // test passes if the code compiles
-        assertThat(Robot(Position(1, 1), Direction.E, Grid(40,40)).toString(), `is`("1 1 E"))
+        assertThat(Robot(Position(1, 1), Direction.E, MarsGrid(40,40)).toString(), `is`("1 1 E"))
     }
 
     @Test
@@ -64,6 +63,6 @@ class RobotTest {
 
     private fun newRobotWith(current_x: Int = 10,
                              current_y: Int = 10,
-                             currentDir: Direction = Direction.N, currentGrid: Grid = Grid(40, 40))
+                             currentDir: Direction = Direction.N, currentGrid: MarsGrid = MarsGrid(40, 40))
             = Robot(Position(x = current_x, y = current_y), dir = currentDir, grid = currentGrid)
 }
