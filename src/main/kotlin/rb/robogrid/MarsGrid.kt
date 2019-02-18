@@ -1,6 +1,10 @@
 package rb.robogrid
 
-class MarsGrid(w: Int, h: Int) {
+interface Grid {
+    fun accept(currentPos: Position): Position
+}
+
+class MarsGrid(w: Int, h: Int) : Grid {
 
     // may be over engineered for the initial req. but it's a simple
     // initialisation that sets up for future enhancements (risk of yagni!)
@@ -10,7 +14,7 @@ class MarsGrid(w: Int, h: Int) {
 
     private val scentedPos = mutableMapOf<Position, Unit>()
 
-    fun accept(currentPos: Position): Position {
+    override fun accept(currentPos: Position): Position {
         if(currentPos.x in zero.x .. top.x && currentPos.y in zero.y .. top.y) return currentPos
         if(scentedPos[currentPos] != null) return Position.SCENTED_LOST
         scentedPos[currentPos] = Unit
