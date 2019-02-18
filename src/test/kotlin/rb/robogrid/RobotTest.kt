@@ -49,5 +49,13 @@ class RobotTest {
         assertThat(newRobotWith(Direction.S).apply(Instruction.R).dir, `is`(Direction.W))
     }
 
+    @Test
+    fun `robot instructed to move forward won't change direction`() {
+        assertThat(newRobotWith(Direction.E).apply(Instruction.F).dir, `is`(Direction.E))
+        assertThat(newRobotWith(Direction.N).apply(Instruction.F).dir, `is`(Direction.N))
+        assertThat(newRobotWith(Direction.W).apply(Instruction.F).dir, `is`(Direction.W))
+        assertThat(newRobotWith(Direction.S).apply(Instruction.F).dir, `is`(Direction.S))
+    }
+
     private fun newRobotWith(currentDir: Direction) = Robot(0, 0, dir = currentDir)
 }
