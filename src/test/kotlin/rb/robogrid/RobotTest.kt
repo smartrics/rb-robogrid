@@ -40,30 +40,26 @@ class RobotTest {
     @Test
     fun `robot moving forward when at north increases y by 1 and keeps x as is`() {
         val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.N).apply(Instruction.F)
-        assertThat(robot.position.x, `is`(10))
-        assertThat(robot.position.y, `is`(8))
+        assertThat(robot.position, `is`(Position(10, 8)))
     }
 
     @Test
     fun `robot moving forward when at east increases x by 1 and keeps y as is`() {
         val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.E).apply(Instruction.F)
-        assertThat(robot.position.x, `is`(11))
-        assertThat(robot.position.y, `is`(7))
+        assertThat(robot.position, `is`(Position(11, 7)))
     }
 
 
     @Test
     fun `robot moving forward when at south decreases y by 1 and keeps x as is`() {
         val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.S).apply(Instruction.F)
-        assertThat(robot.position.x, `is`(10))
-        assertThat(robot.position.y, `is`(6))
+        assertThat(robot.position, `is`(Position(10, 6)))
     }
 
     @Test
     fun `robot moving forward when at west decreases x by 1 and keeps y as is`() {
         val robot = newRobotWith(current_x = 10, current_y = 7, currentDir = Direction.W).apply(Instruction.F)
-        assertThat(robot.position.x, `is`(9))
-        assertThat(robot.position.y, `is`(7))
+        assertThat(robot.position, `is`(Position(9, 7)))
     }
 
     private fun newRobotWith(current_x: Int = 10,
