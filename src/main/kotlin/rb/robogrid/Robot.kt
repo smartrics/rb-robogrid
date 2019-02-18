@@ -11,7 +11,7 @@ enum class Instruction {
     L, R, F
 }
 
-class Robot(val position: Position, val dir: Direction) {
+class Robot(val position: Position, val dir: Direction, val grid: Grid) {
 
     private val directionsMap = mapOf(
             Pair(Direction.E, Instruction.L) to Direction.N,
@@ -30,6 +30,7 @@ class Robot(val position: Position, val dir: Direction) {
     fun apply(instruction: Instruction): Robot {
         val newDirection = directionsMap[Pair(dir, instruction)] ?: dir
         val newPosition = newDirection.positionTransformer(position)
-        return Robot(newPosition, newDirection)
+
+        return Robot(newPosition, newDirection, grid)
     }
 }
