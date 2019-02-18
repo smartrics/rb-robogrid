@@ -2,6 +2,9 @@ package rb.robogrid
 
 data class Position(val x: Int, val y: Int, val scented: Boolean = false) {
 
+    val lost: Boolean
+        get() = this == LOST || this == SCENTED_LOST
+
     companion object {
         val LOST = Position(Int.MAX_VALUE, Int.MAX_VALUE)
         val SCENTED_LOST = Position(Int.MAX_VALUE, Int.MAX_VALUE, true)

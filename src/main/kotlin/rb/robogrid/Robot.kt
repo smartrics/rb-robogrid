@@ -11,7 +11,7 @@ enum class Instruction {
     L, R, F
 }
 
-class Robot(val position: Position, val dir: Direction, val grid: Grid) {
+class Robot(val position: Position, val dir: Direction, val grid: Grid, val lost: Boolean = false) {
 
     private val directionsMap = mapOf(
             Pair(Direction.E, Instruction.L) to Direction.N,
@@ -25,11 +25,15 @@ class Robot(val position: Position, val dir: Direction, val grid: Grid) {
             Pair(Direction.S, Instruction.R) to Direction.W
     )
 
-    override fun toString() = "$position ${dir.name}"
+    override fun toString() = "$position ${dir.name}${if (lost) " LOST" else ""}"
 
     fun apply(instruction: Instruction): Robot {
+        if(lost) return this
         val newDirection = directionsMap[Pair(dir, instruction)] ?: dir
-        val newPosition = newDirection.positionTransformer(instruction, position)
-        return Robot(grid.accept(newPosition), newDirection, grid)
+        val newPosition = grid.accept(newDirection.positionTransformer(instruction, position))
+        if(newPosition.lost)
+            return Robot(position, newDirection, grid, true)
+        else
+            return Robot(newPosition, newDirection, grid)
     }
 }

@@ -3,15 +3,48 @@
  */
 package rb.robogrid
 
-
+import java.io.File
 
 class App {
-    val greeting: String
-        get() {
-            return "Hello world."
+    fun process(fileName: String) {
+        var nextBot = true
+        var l1 = ""
+        var grid: Grid? = null
+        File(fileName).forEachLine { line ->
+            if (grid == null) {
+                val gridCoordinates = line.split(" ")
+                grid = MarsGrid(gridCoordinates[0].toInt(), gridCoordinates[1].toInt())
+            } else {
+                if (nextBot) {
+                    l1 = line
+                    nextBot = false
+                } else {
+                    nextBot = true
+                    val botCoordinates = l1.split(" ")
+                    val commands = line
+
+                    val x = botCoordinates[0].toInt()
+                    val y = botCoordinates[1].toInt()
+                    val d = Direction.valueOf(botCoordinates[2])
+
+                    var bot = Robot(Position(x, y), d, grid!!)
+
+                    val comList = commands.map { c -> Instruction.valueOf("$c") }
+
+                    val sizedComList = if(comList.size > 100) comList.subList(0, 100) else comList
+
+                    println(Remote.execute(bot, sizedComList) {
+                        //println(" =====  [ $it ]")
+                    })
+
+                }
+            }
         }
+
+    }
+
 }
 
 fun main(args: Array<String>) {
-    println(App().greeting)
+    App().process(args[0])
 }
