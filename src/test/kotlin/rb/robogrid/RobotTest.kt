@@ -32,4 +32,9 @@ class RobotTest {
     fun `robot y coordinate cannot be smaller than 0`() {
         Robot(x = 0, y = -1, dir = Direction.E)
     }
+
+    @Test
+    fun `robot instructed to move left changes direction`() {
+        assertThat(Robot(0, 0, dir= Direction.E).apply(Instruction.L).dir, `is`(Direction.N))
+    }
 }
